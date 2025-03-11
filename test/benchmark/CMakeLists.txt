@@ -3,6 +3,9 @@ cmake_minimum_required (VERSION 3.20)
 set (JSTMAP_BENCHMARK_MIN_TIME "1" CACHE STRING "Set --benchmark_min_time= for each benchmark.")
 set (JSTMAP_BENCHMARK_TIME_UNIT "ns" CACHE STRING "Set --benchmark_time_unit= for each benchmark.")
 
+# Add seqan3 as dependency for some cmake functions.
+CPMGetPackage (seqan3)
+
 macro (libjst_benchmark)
     set(options "")
     set(oneValueArgs SOURCE REPETITIONS)
@@ -20,7 +23,8 @@ macro (libjst_benchmark)
     get_test_component (test_name "${benchmark}" TEST_NAME)
 
     add_executable (${target} ${MACRO_BENCHMARK_SOURCE})
-    target_link_libraries (${target} libjst::test::performance ${MACRO_BENCHMARK_DEPENDS})
+    target_include_directories (${target} PUBLIC "${seqan3_SOURCE_DIR}/test/include")
+    target_link_libraries (${target} libjst::test::performance seqan3::seqan3 ${MACRO_BENCHMARK_DEPENDS})
     add_test (NAME "${test_name}"
               COMMAND   ${target}
                         --benchmark_repetitions=${MACRO_BENCHMARK_REPETITIONS}

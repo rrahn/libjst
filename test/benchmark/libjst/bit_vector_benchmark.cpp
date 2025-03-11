@@ -15,8 +15,6 @@
 #include <seqan3/test/performance/sequence_generator.hpp>
 #include <seqan3/test/performance/units.hpp>
 
-#include <sdsl/bit_vectors.hpp>
-
 #include <libjst/utility/bit_vector_adaptor.hpp>
 #include <libjst/utility/bit_vector.hpp>
 

@@ -89,7 +89,7 @@ void benchmark_sequential_access(benchmark::State & state) {
 }
 
 // BENCHMARK_TEMPLATE(benchmark_sequential_access, std::vector<char>)->Apply(benchmark_args);
-BENCHMARK_TEMPLATE(benchmark_sequential_access, libjst::journaled_sequence<std::vector<char>, uint32_t>)->Apply(benchmark_args);
+BENCHMARK_TEMPLATE(benchmark_sequential_access, libjst::journaled_sequence<std::vector<char>>)->Apply(benchmark_args);
 
 // ----------------------------------------------------------------------------
 // Benchmark access random
@@ -130,7 +130,7 @@ void benchmark_random_access(benchmark::State & state) {
 }
 
 // BENCHMARK_TEMPLATE(benchmark_random_access, std::vector<char>)->Apply(benchmark_args);
-BENCHMARK_TEMPLATE(benchmark_random_access, libjst::journaled_sequence<std::vector<char>, uint32_t>)->Apply(benchmark_args);
+BENCHMARK_TEMPLATE(benchmark_random_access, libjst::journaled_sequence<std::vector<char>>)->Apply(benchmark_args);
 
 // ----------------------------------------------------------------------------
 // Benchmark record back
@@ -172,7 +172,7 @@ void benchmark_sequential_record(benchmark::State & state) {
 }
 
 // BENCHMARK_TEMPLATE(benchmark_sequential_record, std::vector<char>)->Apply(benchmark_args);
-BENCHMARK_TEMPLATE(benchmark_sequential_record, libjst::journaled_sequence<std::vector<char>, uint32_t>)->Apply(benchmark_args);
+BENCHMARK_TEMPLATE(benchmark_sequential_record, libjst::journaled_sequence<std::vector<char>>)->Apply(benchmark_args);
 
 // ----------------------------------------------------------------------------
 // Benchmark record random
@@ -194,7 +194,7 @@ void benchmark_random_record(benchmark::State & state) {
 }
 
 // BENCHMARK_TEMPLATE(benchmark_random_record, std::vector<char>)->Apply(benchmark_args);
-BENCHMARK_TEMPLATE(benchmark_random_record, libjst::journaled_sequence<std::vector<char>, uint32_t>)->Apply(benchmark_args);
+BENCHMARK_TEMPLATE(benchmark_random_record, libjst::journaled_sequence<std::vector<char>>)->Apply(benchmark_args);
 
 // ----------------------------------------------------------------------------
 // Run benchmark

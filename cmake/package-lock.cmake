@@ -59,3 +59,15 @@ CPMDeclarePackage (cereal
                    GITHUB_REPOSITORY USCiLab/cereal
                    SYSTEM TRUE
                    OPTIONS "JUST_INSTALL_CEREAL ON" "CMAKE_MESSAGE_LOG_LEVEL WARNING")
+
+# seqan3
+# seqan3
+set (LIBJST_SEQAN3_VERSION 2863cbbe336a51c21932c69635e814b6e3a8a4ce CACHE STRING "" FORCE)
+CPMDeclarePackage (seqan3
+                   NAME seqan3
+                   GIT_TAG ${LIBJST_SEQAN3_VERSION} # main
+                   GITHUB_REPOSITORY seqan/seqan3
+                   SYSTEM TRUE
+                   EXCLUDE_FROM_ALL TRUE
+                   OPTIONS "INSTALL_SEQAN3 OFF" "CMAKE_MESSAGE_LOG_LEVEL WARNING"
+)
