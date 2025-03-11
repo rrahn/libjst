@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.20)
 
-set (JSTMAP_BENCHMARK_MIN_TIME "1" CACHE STRING "Set --benchmark_min_time= for each benchmark.")
-set (JSTMAP_BENCHMARK_TIME_UNIT "ns" CACHE STRING "Set --benchmark_time_unit= for each benchmark.")
+set (LIBJST_BENCHMARK_MIN_TIME "1" CACHE STRING "Set --benchmark_min_time= for each benchmark.")
+set (LIBJST_BENCHMARK_TIME_UNIT "ns" CACHE STRING "Set --benchmark_time_unit= for each benchmark.")
 
 # Add seqan3 as dependency for some cmake functions.
 CPMGetPackage (seqan3)
@@ -29,7 +29,7 @@ macro (libjst_benchmark)
               COMMAND   ${target}
                         --benchmark_repetitions=${MACRO_BENCHMARK_REPETITIONS}
                         --benchmark_min_time=0
-                        --benchmark_time_unit=${JSTMAP_BENCHMARK_TIME_UNIT}
+                        --benchmark_time_unit=${LIBJST_BENCHMARK_TIME_UNIT}
                         --benchmark_out=$<TARGET_FILE_NAME:${target}>.json
                         --benchmark_out_format=json)
 
