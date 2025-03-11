@@ -61,39 +61,39 @@ find_path (SEQAN3_TEST_INCLUDE_DIR NAMES seqan3/test/expect_range_eq.hpp
 # Cmake interface targets
 #--------------------------------------------------------------------
 
-add_library (jstmap_test INTERFACE)
-target_include_directories (jstmap_test INTERFACE "${SEQAN3_TEST_INCLUDE_DIR}")
-target_compile_options (jstmap_test INTERFACE "-pedantic"  "-Wall" "-Wextra" "-Werror")
-target_compile_features (jstmap_test INTERFACE cxx_std_20)
-target_link_libraries (jstmap_test INTERFACE "pthread" "seqan3::seqan3")
-add_library (jstmap::test ALIAS jstmap_test)
+add_library (libjst_test INTERFACE)
+target_include_directories (libjst_test INTERFACE "${SEQAN3_TEST_INCLUDE_DIR}")
+target_compile_options (libjst_test INTERFACE "-pedantic"  "-Wall" "-Wextra" "-Werror")
+target_compile_features (libjst_test INTERFACE cxx_std_20)
+target_link_libraries (libjst_test INTERFACE "pthread" "seqan3::seqan3")
+add_library (libjst::test ALIAS libjst_test)
 
-add_library (jstmap_test_unit INTERFACE)
-target_include_directories (jstmap_test_unit INTERFACE "GTest::gtest" "GTest::gtest_main" "jstmap::test")
-target_link_libraries (jstmap_test_unit INTERFACE "GTest::gtest" "GTest::gtest_main" "jstmap::test")
-add_library (jstmap::test::unit ALIAS jstmap_test_unit)
+add_library (libjst_test_unit INTERFACE)
+target_include_directories (libjst_test_unit INTERFACE "GTest::gtest" "GTest::gtest_main" "libjst::test")
+target_link_libraries (libjst_test_unit INTERFACE "GTest::gtest" "GTest::gtest_main" "libjst::test")
+add_library (libjst::test::unit ALIAS libjst_test_unit)
 
 # Add dedicated unit test interface for libjst using Catch2 as test framework.
 add_library (libjst_test_catch2 INTERFACE)
-target_link_libraries (libjst_test_catch2 INTERFACE "jstmap::test" "libjst::libjst" "Catch2::Catch2WithMain")
+target_link_libraries (libjst_test_catch2 INTERFACE "libjst::test" "libjst::libjst" "Catch2::Catch2WithMain")
 add_library (libjst::test::catch2 ALIAS libjst_test_catch2)
 
-add_library (jstmap_test_performance INTERFACE)
-target_include_directories (jstmap_test_performance INTERFACE "benchmark::benchmark" "jstmap::test")
-target_link_libraries (jstmap_test_performance INTERFACE "benchmark::benchmark" "jstmap::test" )
-add_library (jstmap::test::performance ALIAS jstmap_test_performance)
+add_library (libjst_test_performance INTERFACE)
+target_include_directories (libjst_test_performance INTERFACE "benchmark::benchmark" "libjst::test")
+target_link_libraries (libjst_test_performance INTERFACE "benchmark::benchmark" "libjst::test" )
+add_library (libjst::test::performance ALIAS libjst_test_performance)
 
-add_library (jstmap_test_asan INTERFACE)
-target_compile_options(jstmap_test_asan INTERFACE "${JST_SANITIZER_FLAGS}")
-target_link_options(jstmap_test_asan INTERFACE "${JST_SANITIZER_FLAGS}")
-target_link_libraries (jstmap_test_asan INTERFACE "jstmap::test::unit")
-add_library (jstmap::test::asan ALIAS jstmap_test_asan)
+add_library (libjst_test_asan INTERFACE)
+target_compile_options(libjst_test_asan INTERFACE "${JST_SANITIZER_FLAGS}")
+target_link_options(libjst_test_asan INTERFACE "${JST_SANITIZER_FLAGS}")
+target_link_libraries (libjst_test_asan INTERFACE "libjst::test::unit")
+add_library (libjst::test::asan ALIAS libjst_test_asan)
 
-add_library (jstmap_test_tsan INTERFACE)
-target_compile_options(jstmap_test_tsan INTERFACE "${JST_SANITIZER_FLAGS}")
-target_link_options(jstmap_test_tsan INTERFACE "${JST_SANITIZER_FLAGS}")
-target_link_libraries (jstmap_test_tsan INTERFACE "jstmap::test::unit")
-add_library (jstmap::test::tsan ALIAS jstmap_test_tsan)
+add_library (libjst_test_tsan INTERFACE)
+target_compile_options(libjst_test_tsan INTERFACE "${JST_SANITIZER_FLAGS}")
+target_link_options(libjst_test_tsan INTERFACE "${JST_SANITIZER_FLAGS}")
+target_link_libraries (libjst_test_tsan INTERFACE "libjst::test::unit")
+add_library (libjst::test::tsan ALIAS libjst_test_tsan)
 
 # ----------------------------------------------------------------------------
 # Commonly used macros for the different test modules.

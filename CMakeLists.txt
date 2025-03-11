@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 3.20)
 ## CUSTOMISE
 
 # Define the application name and version.
-project (jstmap VERSION 0.0.1 LANGUAGES CXX)
+project (libjst VERSION 0.0.1 LANGUAGES CXX)
 set (CMAKE_CXX_STANDARD 20)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -59,7 +59,7 @@ add_subdirectory (doc EXCLUDE_FROM_ALL)
 
 ## TEST
 
-include (test/jstmap_test.cmake)
+include (test/libjst_test.cmake)
 
 add_subdirectory (test/api EXCLUDE_FROM_ALL)
 
