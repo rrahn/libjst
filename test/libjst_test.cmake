@@ -47,7 +47,7 @@ unset (CMAKE_RUNTIME_OUTPUT_DIRECTORY)
 add_library (libjst_test INTERFACE)
 target_compile_options (libjst_test INTERFACE "-pedantic"  "-Wall" "-Wextra" "-Werror")
 target_compile_features (libjst_test INTERFACE cxx_std_20)
-target_link_libraries (libjst_test INTERFACE "pthread" "cereal::cereal")
+target_link_libraries (libjst_test INTERFACE "pthread")
 add_library (libjst::test ALIAS libjst_test)
 
 add_library (libjst_test_unit INTERFACE)
