@@ -38,9 +38,7 @@ CPMUsePackageLock (${CMAKE_CURRENT_LIST_DIR}/cmake/package-lock.cmake)
 
 # Use ccache if available. This speeds up the build process by caching files that have been compiled before.
 CPMGetPackage (use_ccache)
-CPMGetPackage (catch2)
-CPMGetPackage (googletest)
-CPMGetPackage (googlebenchmark)
+CPMGetPackage (cereal)
 
 # Dependency: OpenMP
 find_package(OpenMP REQUIRED)

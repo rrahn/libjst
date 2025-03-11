@@ -50,3 +50,12 @@ CPMDeclarePackage (use_ccache
                    SYSTEM TRUE
                    EXCLUDE_FROM_ALL TRUE
 )
+
+# cereal
+set (LIBJST_CEREAL_VERSION 1.3.2 CACHE STRING "" FORCE)
+CPMDeclarePackage (cereal
+                   NAME cereal
+                   VERSION ${LIBJST_CEREAL_VERSION}
+                   GITHUB_REPOSITORY USCiLab/cereal
+                   SYSTEM TRUE
+                   OPTIONS "JUST_INSTALL_CEREAL ON" "CMAKE_MESSAGE_LOG_LEVEL WARNING")

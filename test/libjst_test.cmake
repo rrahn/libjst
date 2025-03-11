@@ -65,7 +65,7 @@ add_library (libjst_test INTERFACE)
 target_include_directories (libjst_test INTERFACE "${SEQAN3_TEST_INCLUDE_DIR}")
 target_compile_options (libjst_test INTERFACE "-pedantic"  "-Wall" "-Wextra" "-Werror")
 target_compile_features (libjst_test INTERFACE cxx_std_20)
-target_link_libraries (libjst_test INTERFACE "pthread" "seqan3::seqan3")
+target_link_libraries (libjst_test INTERFACE "pthread" "cereal::cereal")
 add_library (libjst::test ALIAS libjst_test)
 
 add_library (libjst_test_unit INTERFACE)
