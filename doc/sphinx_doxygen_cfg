@@ -935,7 +935,7 @@ WARN_LINE_FORMAT       = "at line $line of file $file"
 # specified the warning and error messages are written to standard output
 # (stdout).
 
-WARN_LOGFILE           = ${JSTMAP_DOXYGEN_LOGFILE}
+WARN_LOGFILE           = ${LIBJST_DOXYGEN_LOGFILE}
 
 #---------------------------------------------------------------------------
 # Configuration options related to the input files
@@ -2341,9 +2341,7 @@ SEARCH_INCLUDES        = YES
 # RECURSIVE has no effect here.
 # This tag requires that the tag SEARCH_INCLUDES is set to YES.
 
-INCLUDE_PATH           = ${CMAKE_SOURCE_DIR}/jstmap \
-                         ${CMAKE_SOURCE_DIR}/jstmap-index \
-                         ${CMAKE_SOURCE_DIR}/libjst
+INCLUDE_PATH           = ${CMAKE_SOURCE_DIR}/libjst
 
 # You can use the INCLUDE_FILE_PATTERNS tag to specify one or more wildcard
 # patterns (like *.h and *.hpp) to filter out the header-files in the

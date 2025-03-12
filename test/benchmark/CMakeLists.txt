@@ -1,9 +1,12 @@
 cmake_minimum_required (VERSION 3.20)
 
-set (JSTMAP_BENCHMARK_MIN_TIME "1" CACHE STRING "Set --benchmark_min_time= for each benchmark.")
-set (JSTMAP_BENCHMARK_TIME_UNIT "ns" CACHE STRING "Set --benchmark_time_unit= for each benchmark.")
+set (LIBJST_BENCHMARK_MIN_TIME "1" CACHE STRING "Set --benchmark_min_time= for each benchmark.")
+set (LIBJST_BENCHMARK_TIME_UNIT "ns" CACHE STRING "Set --benchmark_time_unit= for each benchmark.")
 
-macro (jstmap_benchmark)
+# Add seqan3 as dependency for some cmake functions.
+CPMGetPackage (seqan3)
+
+macro (libjst_benchmark)
     set(options "")
     set(oneValueArgs SOURCE REPETITIONS)
     set(multiValueArgs DEPENDS)
@@ -20,12 +23,13 @@ macro (jstmap_benchmark)
     get_test_component (test_name "${benchmark}" TEST_NAME)
 
     add_executable (${target} ${MACRO_BENCHMARK_SOURCE})
-    target_link_libraries (${target} jstmap::test::performance ${MACRO_BENCHMARK_DEPENDS})
+    target_include_directories (${target} PUBLIC "${seqan3_SOURCE_DIR}/test/include")
+    target_link_libraries (${target} libjst::test::performance seqan3::seqan3 ${MACRO_BENCHMARK_DEPENDS})
     add_test (NAME "${test_name}"
               COMMAND   ${target}
                         --benchmark_repetitions=${MACRO_BENCHMARK_REPETITIONS}
                         --benchmark_min_time=0
-                        --benchmark_time_unit=${JSTMAP_BENCHMARK_TIME_UNIT}
+                        --benchmark_time_unit=${LIBJST_BENCHMARK_TIME_UNIT}
                         --benchmark_out=$<TARGET_FILE_NAME:${target}>.json
                         --benchmark_out_format=json)
 
@@ -37,7 +41,7 @@ macro (jstmap_benchmark)
 endmacro ()
 
 # Adds a macro benchmark:
-function (jstmap_macro_benchmark macro_benchmark_cpp)
+function (libjst_macro_benchmark macro_benchmark_cpp)
     cmake_parse_arguments(
         "MACRO_BENCHMARK"
         ""
@@ -45,9 +49,8 @@ function (jstmap_macro_benchmark macro_benchmark_cpp)
         "META_DATA"
         ${ARGN}
     )
-    jstmap_benchmark(SOURCE ${macro_benchmark_cpp}
-                     REPETITIONS ${MACRO_BENCHMARK_REPETITIONS}
-                     DEPENDS jstmap::create jstmap::search)
+    libjst_benchmark(SOURCE ${macro_benchmark_cpp}
+                     REPETITIONS ${MACRO_BENCHMARK_REPETITIONS})
 endfunction ()
 
 add_subdirectories ()

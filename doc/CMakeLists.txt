@@ -14,7 +14,7 @@ if (${DOXYGEN_FOUND})
     set (APP_TEMPLATE_DOXYGEN_PREDEFINED_NDEBUG "")
     set (APP_TEMPLATE_DOXYGEN_ENABLED_SECTIONS "DEV")
     set (APP_TEMPLATE_DOXYGEN_EXTRACT_PRIVATE "YES")
-    set (JSTMAP_DOXYGEN_LOGFILE "${LIBJST_DOC_BINARY_DIR}/doxygen.log")
+    set (LIBJST_DOXYGEN_LOGFILE "${LIBJST_DOC_BINARY_DIR}/doxygen.log")
 
     configure_file (${LIBJST_DOC_SOURCE_DIR}/sphinx_doxygen_cfg ${LIBJST_DOC_BINARY_DIR}/build/Doxyfile)
     configure_file (${LIBJST_DOC_SOURCE_DIR}/conf.py.in ${LIBJST_DOC_BINARY_DIR}/source/conf.py)
@@ -55,5 +55,5 @@ enable_testing ()
 
 message (STATUS "Add doc test.")
 add_test (NAME doc_test
-          COMMAND bash -c "cat ${JSTMAP_DOXYGEN_LOGFILE}; test ! -s ${JSTMAP_DOXYGEN_LOGFILE}"
+          COMMAND bash -c "cat ${LIBJST_DOXYGEN_LOGFILE}; test ! -s ${LIBJST_DOXYGEN_LOGFILE}"
           WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})

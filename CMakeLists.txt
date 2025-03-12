@@ -3,8 +3,8 @@ cmake_minimum_required (VERSION 3.20)
 ## CUSTOMISE
 
 # Define the application name and version.
-project (jstmap VERSION 0.0.1 LANGUAGES CXX)
-set (CMAKE_CXX_STANDARD 23)
+project (libjst VERSION 0.0.1 LANGUAGES CXX)
+set (CMAKE_CXX_STANDARD 20)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ## BUILD
@@ -29,13 +29,6 @@ set (FontReset "")
 # This allows including `*.cmake` files from the `cmake` directory without specifying the full path.
 list (APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
-# LTO support. -> only for hibf?
-# include (CheckIPOSupported)
-# check_ipo_supported (RESULT result OUTPUT output LANGUAGES CXX)
-# if (result)
-#     set (CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
-# endif ()
-
 # Add packages.
 # We use CPM for package management: https://github.com/cpm-cmake/CPM.cmake
 # The added packages (e.g., hibf, sharg, seqan3) are defined in the `cmake/package-lock.cmake` file.
@@ -45,18 +38,7 @@ CPMUsePackageLock (${CMAKE_CURRENT_LIST_DIR}/cmake/package-lock.cmake)
 
 # Use ccache if available. This speeds up the build process by caching files that have been compiled before.
 CPMGetPackage (use_ccache)
-# CPMGetPackage (hibf)
-CPMGetPackage (sharg)
-CPMGetPackage (seqan3)
-CPMGetPackage (seqan2)
-if (seqan2_ADDED)
-    add_library (seqan2_seqan2 INTERFACE IMPORTED)
-    target_include_directories (seqan2_seqan2 INTERFACE ${seqan2_SOURCE_DIR}/include)
-    add_library (seqan2::seqan2 ALIAS seqan2_seqan2)
-endif ()
-CPMGetPackage (catch2)
-CPMGetPackage (googletest)
-CPMGetPackage (googlebenchmark)
+CPMGetPackage (cereal)
 
 # Dependency: OpenMP
 find_package(OpenMP REQUIRED)
@@ -67,16 +49,7 @@ find_package(Threads REQUIRED)
 
 ## APPLICATION
 
-add_subdirectory (libcontrib)
 add_subdirectory (libjst)
-add_subdirectory (jstmap-global)
-add_subdirectory (jstmap-create)
-add_subdirectory (jstmap-index)
-add_subdirectory (jstmap-linear)
-add_subdirectory (jstmap-search)
-add_subdirectory (jstmap-simulate)
-add_subdirectory (jstmap-view)
-add_subdirectory (jstmap)
 
 ## DOCUMENTATION
 
@@ -84,9 +57,8 @@ add_subdirectory (doc EXCLUDE_FROM_ALL)
 
 ## TEST
 
-include (test/jstmap_test.cmake)
+include (test/libjst_test.cmake)
 
 add_subdirectory (test/api EXCLUDE_FROM_ALL)
-add_subdirectory (test/cli EXCLUDE_FROM_ALL)
 
 add_subdirectory (test/benchmark EXCLUDE_FROM_ALL)
