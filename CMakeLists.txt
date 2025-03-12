@@ -49,16 +49,18 @@ find_package(Threads REQUIRED)
 
 ## APPLICATION
 
-add_subdirectory (libjst)
+include (libjst-config.cmake)
 
-## DOCUMENTATION
+option (LIBJST_DEVELOPER_MODE "Enable developer mode" ON)
 
-add_subdirectory (doc EXCLUDE_FROM_ALL)
+if (LIBJST_DEVELOPER_MODE)
+    message(STATUS "==== Developer mode enabled ====")
+    ## DOCUMENTATION
+    add_subdirectory (doc EXCLUDE_FROM_ALL)
 
-## TEST
+    ## TEST
+    include (test/libjst_test.cmake)
 
-include (test/libjst_test.cmake)
-
-add_subdirectory (test/api EXCLUDE_FROM_ALL)
-
-add_subdirectory (test/benchmark EXCLUDE_FROM_ALL)
+    add_subdirectory (test/api EXCLUDE_FROM_ALL)
+    add_subdirectory (test/benchmark EXCLUDE_FROM_ALL)
+endif ()
