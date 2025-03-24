@@ -33,7 +33,7 @@ namespace libjst
         using variant_type = typename rcs_store_t::reference;
         using difference_type = std::remove_cvref_t<libjst::variant_position_t<variant_type>>;
 
-        using journaled_sequence_type = journaled_sequence<source_type, difference_type>;
+        using journaled_sequence_type = journaled_sequence<source_type>;
 
         class proxy;
 
