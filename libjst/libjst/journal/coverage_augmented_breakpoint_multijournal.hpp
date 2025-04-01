@@ -19,7 +19,10 @@
 namespace libjst
 {
 
-    // TODO: add concept for coverage
+    /**
+     * @cond
+     * This class is experimental and is removed from the public API.
+     */
     template <libjst::reference_sequence source_t>
     class coverage_augmented_breakpoint_multijournal
     {
@@ -299,4 +302,5 @@ namespace libjst
         }
         /// @}
     };
+    /// @endcond
 }  // namespace libjst

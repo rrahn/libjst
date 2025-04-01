@@ -21,6 +21,10 @@
 namespace libjst
 {
 
+    /**
+     * @cond
+     * This class is experimental and is removed from the public API.
+     */
     class bad_sequence_access : public std::exception
     {
     private:
@@ -38,7 +42,20 @@ namespace libjst
             return _message.data();
         }
     };
+    /// @endcond
 
+    /**
+     * @cond
+     * This class is experimental and is removed from the public API.
+     */
+
+     /**
+      * @brief A polymorphic wrapper for any sequence type.
+      *
+      * @tparam sequence_t The general type of the sequence. This type must be default constructible.
+      *
+      * @note In order for the type erasure to work the wrapped sequence must be convertible to `sequence_t`.
+      */
     template <typename sequence_t>
     class any_sequence
     {
@@ -80,15 +97,23 @@ namespace libjst
         /// @name Member variables
         /// @{
     private:
-        std::unique_ptr<sequence_base> _sequence_ptr{};
+        std::unique_ptr<sequence_base> _sequence_ptr{}; ///< The pointer to the underlying sequence.
         /// @}
 
         /// @name Member functions
         /// @{
     public:
 
+        /// @brief The default constructor.
         constexpr any_sequence() = default;
 
+        /**
+         * @brief Construct the any_sequence from a concrete sequence.
+         *
+         * @tparam concrete_sequence_t The type of the concrete sequence to store.
+         *
+         * @note The concrete sequence type must be convertible to `sequence_t`.
+         */
         template <typename concrete_sequence_t>
         constexpr any_sequence(concrete_sequence_t sequence)
             noexcept(std::is_nothrow_move_constructible_v<concrete_sequence_t>) :
@@ -124,4 +149,5 @@ namespace libjst
         /// @}
 
     };
+    /// @endcond
 }  //namespace libjst
