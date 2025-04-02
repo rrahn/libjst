@@ -18,7 +18,7 @@ namespace libjst
 {
 
     namespace _coverage_intersection {
-        inline constexpr struct _cpo  {
+        struct _cpo  {
             template <typename coverage1_t, typename coverage2_t>
                 requires libjst::tag_invocable<_cpo, coverage1_t, coverage2_t>
             constexpr auto operator()(coverage1_t && c1, coverage2_t && c2) const
@@ -27,12 +27,23 @@ namespace libjst
             {
                 return libjst::tag_invoke(_cpo{}, (coverage1_t &&) c1, (coverage2_t &&) c2);
             }
-        } coverage_intersection;
+        };
     } // namespace _coverage_intersection
-    using _coverage_intersection::coverage_intersection;
+
+    /**
+     * @brief A customization point object for computing the intersection of two coverages.
+     * @tparam coverage1_t The type of the first coverage.
+     * @tparam coverage2_t The type of the second coverage.
+     * @param c1 The first coverage.
+     * @param c2 The second coverage.
+     * @returns The set intersection of the two coverages.
+     */
+    inline constexpr _coverage_intersection::_cpo coverage_intersection{};
+
 
     namespace _coverage_difference {
-        inline constexpr struct _cpo  {
+
+        struct _cpo  {
             template <typename coverage1_t, typename coverage2_t>
                 requires libjst::tag_invocable<_cpo, coverage1_t, coverage2_t>
             constexpr auto operator()(coverage1_t && c1, coverage2_t && c2) const
@@ -41,9 +52,18 @@ namespace libjst
             {
                 return libjst::tag_invoke(_cpo{}, (coverage1_t &&) c1, (coverage2_t &&) c2);
             }
-        } coverage_difference;
+        };
     } // namespace _coverage_difference
-    using _coverage_difference::coverage_difference;
+
+    /**
+     * @brief A customization point object for computing the difference of two coverages.
+     * @tparam coverage1_t The type of the first coverage.
+     * @tparam coverage2_t The type of the second coverage.
+     * @param c1 The first coverage.
+     * @param c2 The second coverage.
+     * @returns The set difference of the two given coverages (i.e., c1 \ c2).
+     */
+    inline constexpr _coverage_difference::_cpo coverage_difference{};
 
     namespace _get_domain {
         inline constexpr struct _cpo  {

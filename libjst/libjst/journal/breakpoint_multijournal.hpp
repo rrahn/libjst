@@ -24,7 +24,16 @@
 
 namespace libjst
 {
-    // TODO: add concept for coverage
+    /**
+     * @cond
+     * This class is experimental and is removed from the public API.
+     */
+    /**
+     * @brief A journal implementation that stores multiple segments in a multimap.
+     *
+     * @tparam source_t The type of the source sequence. Must model libjst::reference_sequence.
+     * @warning This is experimental and may change in the future.
+     */
     template <libjst::reference_sequence source_t>
     class breakpoint_multijournal
     {
@@ -223,4 +232,6 @@ namespace libjst
         }
         /// @}
     };
+
+    /// @endcond
 } // namespace libjst
